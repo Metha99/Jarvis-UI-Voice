@@ -67,3 +67,51 @@ st.markdown("""
         0% {opacity:0; transform:scale(0.98);}
         100% {opacity:1; transform:scale(1);}
     }
+    </style>
+    <link href="https://fonts.googleapis.com/css?family=Orbitron:600" rel="stylesheet">
+""", unsafe_allow_html=True)
+
+# ----------- MAIN LAYOUT ----------
+st.markdown('<div class="centered">', unsafe_allow_html=True)
+st.markdown('<div class="jarvis-orb"></div>', unsafe_allow_html=True)
+st.markdown('<div class="jarvis-title">Jarvis</div>', unsafe_allow_html=True)
+
+# ------- SEARCH BAR WITH INSTANT SUBMIT -------
+search = st.text_input(
+    "",  # no label
+    key="search_input",
+    placeholder="Ask me anything about your cloud, incidents, or infrastructure...",
+    label_visibility="collapsed",
+)
+
+st.markdown('</div>', unsafe_allow_html=True)  # End centered block
+
+# ------- AI ANSWER SIMULATION / FADE IN -------
+if "answer" not in st.session_state:
+    st.session_state.answer = ""
+
+if search:
+    # Simulate minimal "AI" response (replace with your LLM call)
+    st.session_state.answer = ""
+    with st.spinner("Jarvis is thinking..."):
+        time.sleep(0.7)  # Simulate response delay
+        if "backup" in search.lower():
+            st.session_state.answer = "🔐 <b>Follow KB7709271, step 7.1 section B.</b>"
+        elif "cpu" in search.lower():
+            st.session_state.answer = "💡 Check running processes, consider scaling resources."
+        elif "login" in search.lower():
+            st.session_state.answer = "🔎 Investigate authentication logs and reset as needed."
+        else:
+            st.session_state.answer = "🤖 I'm Jarvis. Ask me about incidents, cloud status, or best practices!"
+
+if st.session_state.answer:
+    st.markdown(
+        f'<div class="ai-answer-bubble">{st.session_state.answer}</div>',
+        unsafe_allow_html=True
+    )
+
+st.markdown("""
+<div style="margin-top: 60px; color: #5a588a; font-size: 1em; text-align:center;">
+  Professional, futuristic Jarvis UI &bull; Powered by Streamlit &bull; v0.2
+</div>
+""", unsafe_allow_html=True)
