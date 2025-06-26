@@ -12,7 +12,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 st.markdown('<div class="jarvis-header">Jarvis</div>', unsafe_allow_html=True)
-st.image('assets/jarvis_logo.png', width=80)
+#st.image('assets/jarvis_logo.png', width=80)
 
 if "chat_history" not in st.session_state:
     st.session_state.chat_history = []
