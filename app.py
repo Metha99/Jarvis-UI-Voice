@@ -3,7 +3,6 @@ import time
 
 st.set_page_config(page_title="Jarvis AI", page_icon="🤖", layout="wide")
 
-# ---------- CUSTOM STYLES AND ANIMATIONS ----------
 st.markdown("""
     <style>
     body {
@@ -71,12 +70,11 @@ st.markdown("""
     <link href="https://fonts.googleapis.com/css?family=Orbitron:600" rel="stylesheet">
 """, unsafe_allow_html=True)
 
-# ----------- MAIN LAYOUT ----------
+# Start rendering the UI (top-level, not in a function!)
 st.markdown('<div class="centered">', unsafe_allow_html=True)
 st.markdown('<div class="jarvis-orb"></div>', unsafe_allow_html=True)
 st.markdown('<div class="jarvis-title">Jarvis</div>', unsafe_allow_html=True)
 
-# ------- SEARCH BAR WITH INSTANT SUBMIT -------
 search = st.text_input(
     "",  # no label
     key="search_input",
@@ -84,17 +82,15 @@ search = st.text_input(
     label_visibility="collapsed",
 )
 
-st.markdown('</div>', unsafe_allow_html=True)  # End centered block
+st.markdown('</div>', unsafe_allow_html=True)
 
-# ------- AI ANSWER SIMULATION / FADE IN -------
 if "answer" not in st.session_state:
     st.session_state.answer = ""
 
 if search:
-    # Simulate minimal "AI" response (replace with your LLM call)
     st.session_state.answer = ""
     with st.spinner("Jarvis is thinking..."):
-        time.sleep(0.7)  # Simulate response delay
+        time.sleep(0.7)
         if "backup" in search.lower():
             st.session_state.answer = "🔐 <b>Follow KB7709271, step 7.1 section B.</b>"
         elif "cpu" in search.lower():
@@ -112,6 +108,6 @@ if st.session_state.answer:
 
 st.markdown("""
 <div style="margin-top: 60px; color: #5a588a; font-size: 1em; text-align:center;">
-  Professional, futuristic Jarvis UI &bull; Powered by Streamlit &bull; v0.2
+  Professional, futuristic Jarvis UI • Powered by Streamlit • v0.2
 </div>
 """, unsafe_allow_html=True)
