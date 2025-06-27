@@ -1,99 +1,96 @@
 import streamlit as st
 import time
 
-st.set_page_config(page_title="Jarvis AI", page_icon="🤖", layout="wide")
+st.set_page_config(page_title="Jarvis AI", page_icon="🤖", layout="centered")
 
-# ----------- MODERN GLASSMORPHISM STYLE -----------
+# ---------- APPLE-STYLE MODERN WHITE THEME ----------
 st.markdown("""
     <style>
     html, body, [data-testid="stAppViewContainer"] {
-        background: linear-gradient(135deg, #17181c 40%, #e9ebf7 170%);
+        background: linear-gradient(120deg, #f7faff 85%, #e7eaf7 100%) !important;
     }
-    .glass-panel {
-        margin: 60px auto 0 auto;
-        background: rgba(255,255,255,0.13);
+    .jarvis-glass {
+        margin: 50px auto 0 auto;
+        background: rgba(255,255,255,0.88);
         border-radius: 24px;
-        box-shadow: 0 8px 36px 0 #41404c18, 0 1.5px 4.5px #14143212;
-        backdrop-filter: blur(10px);
-        padding: 2.4em 2.2em 2em 2.2em;
-        max-width: 540px;
-        min-width: 350px;
-        border: 1.7px solid #2e348c1f;
-        transition: box-shadow 0.2s;
+        box-shadow: 0 10px 36px 0 #6073e21a, 0 2px 8px #dee5ff24;
+        backdrop-filter: blur(12px);
+        padding: 2.6em 2.1em 2.2em 2.1em;
+        max-width: 500px;
+        min-width: 310px;
+        border: 1.5px solid #e9eaf7;
+        transition: box-shadow 0.3s;
     }
-    .glass-panel:hover {
-        box-shadow: 0 8px 52px 0 #5959ff28, 0 1.5px 4.5px #1d2344a0;
-        border: 1.7px solid #4644ff2a;
+    .jarvis-glass:hover {
+        box-shadow: 0 14px 64px 0 #6b7cf650, 0 2px 8px #7ca6ff14;
+        border: 1.6px solid #8fb3ff14;
     }
     .jarvis-header {
-        font-size: 2.6em;
-        letter-spacing: 3px;
-        font-family: 'Montserrat', 'Inter', sans-serif;
-        background: linear-gradient(87deg,#4654ff 30%,#1bcbe1 100%);
+        font-size: 2.2em;
+        font-family: 'SF Pro Display', 'Inter', 'Montserrat', sans-serif;
+        background: linear-gradient(87deg,#1767ff 20%,#3ea4ea 100%);
         -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         font-weight: 900;
+        letter-spacing: 2.2px;
         margin-bottom: 12px;
-        text-align:center;
-        text-shadow: 0 2px 32px #3c78c399;
+        text-align: center;
     }
     .subtext {
-        color: #565684; text-align:center; margin-bottom: 1.7em;
+        color: #8692b2; text-align: center; margin-bottom: 2.2em;
         font-family: 'Inter', sans-serif;
-        font-size: 1.12em;
-        letter-spacing: 1.5px;
+        font-size: 1.13em;
+        letter-spacing: 1.4px;
     }
     .input-bar {
-        width: 100%;
-        font-size: 1.17em;
+        width: 100%; font-size: 1.16em;
         padding: 1.1em 1.1em 1.1em 1.3em;
         border-radius: 13px;
-        border: 1.5px solid #c9caff7a;
+        border: 1.4px solid #c9caff7a;
         outline: none;
-        margin-bottom: 24px;
-        background: rgba(230,233,252,0.92);
+        margin-bottom: 28px;
+        background: rgba(245,246,252,0.94);
         color: #23243b;
-        font-family: 'Montserrat', 'Inter', sans-serif;
-        box-shadow: 0 2px 20px #b6b4fc0f;
-        transition: border 0.2s, box-shadow 0.2s;
+        font-family: 'Inter', 'Montserrat', sans-serif;
+        box-shadow: 0 2px 18px #b6b4fc13;
+        transition: border 0.23s, box-shadow 0.23s;
     }
     .input-bar:focus {
-        border: 2px solid #6b7aff;
+        border: 2.3px solid #5a90ff;
         background: #fff;
-        box-shadow: 0 0 14px #aab2ff44;
+        box-shadow: 0 0 12px #c0cfff44;
     }
     .ai-answer-bubble {
         margin: 38px auto 0 auto;
-        background: linear-gradient(95deg,#f5f7ff 55%,#e7eaf7 100%);
-        color: #343465;
-        border-radius: 15px;
-        box-shadow: 0 2px 28px #4c50a733;
-        font-size: 1.16em;
+        background: linear-gradient(98deg,#fafdff 65%,#e3eaff 100%);
+        color: #304268;
+        border-radius: 16px;
+        box-shadow: 0 2px 22px #adb0c633;
+        font-size: 1.14em;
         font-family: 'Inter', 'Montserrat', sans-serif;
-        padding: 1.35em 1.6em;
-        animation: fadeIn 1.15s;
-        border: 1.4px solid #b3bdff54;
+        padding: 1.27em 1.45em;
+        animation: fadeIn 1.1s;
+        border: 1.4px solid #e1e4f7;
     }
     @keyframes fadeIn {
-        0% {opacity:0; transform:translateY(30px);}
+        0% {opacity:0; transform:translateY(22px);}
         100% {opacity:1; transform:translateY(0);}
     }
     .footer-glass {
         margin-top: 70px;
-        color: #7b84d4c5;
+        color: #8599c3c5;
         font-size: 1em;
         text-align:center;
         font-family: 'Inter',sans-serif;
         letter-spacing: 1.5px;
     }
     </style>
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:800|Inter:400,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Inter:400,700|Montserrat:700" rel="stylesheet">
 """, unsafe_allow_html=True)
 
-st.markdown('<div class="glass-panel">', unsafe_allow_html=True)
+st.markdown('<div class="jarvis-glass">', unsafe_allow_html=True)
 st.markdown('<div class="jarvis-header">Jarvis</div>', unsafe_allow_html=True)
 st.markdown('<div class="subtext">Your minimal, premium AI assistant</div>', unsafe_allow_html=True)
 
-# Custom search bar
 search = st.text_input(
     "Ask Jarvis anything...",
     key="search_input",
@@ -128,7 +125,7 @@ if st.session_state.answer:
 
 st.markdown(
     '<div class="footer-glass">'
-    "Minimal, premium Jarvis UI &bull; Powered by Streamlit &bull; v0.1"
+    "Minimal, premium Jarvis UI &bull; Powered by Streamlit • v0.1"
     '</div>',
     unsafe_allow_html=True
 )
